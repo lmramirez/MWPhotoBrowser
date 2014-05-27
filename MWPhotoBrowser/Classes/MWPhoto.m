@@ -8,15 +8,11 @@
 
 #import "MWPhoto.h"
 #import "MWPhotoBrowser.h"
-#import "SDWebImageDecoder.h"
-#import "SDWebImageManager.h"
-#import "SDWebImageOperation.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 
 @interface MWPhoto () {
 
     BOOL _loadingInProgress;
-    id <SDWebImageOperation> _webImageOperation;
         
 }
 
@@ -210,10 +206,10 @@
 }
 
 - (void)cancelAnyLoading {
-    if (_webImageOperation) {
-        [_webImageOperation cancel];
+//    if (_webImageOperation) {
+//        [_webImageOperation cancel];
         _loadingInProgress = NO;
-    }
+//    }
 }
 
 @end
