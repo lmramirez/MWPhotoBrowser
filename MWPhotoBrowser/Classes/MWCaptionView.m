@@ -31,14 +31,14 @@ static const CGFloat labelPadding = 10;
             self.barStyle = UIBarStyleBlackTranslucent;
             self.tintColor = nil;
             self.barTintColor = nil;
-            self.barStyle = UIBarStyleBlackTranslucent;
+            self.translucent = NO;
             [self setBackgroundImage:nil forToolbarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
         } else {
             // Transparent black with no gloss
             CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
             UIGraphicsBeginImageContext(rect.size);
             CGContextRef context = UIGraphicsGetCurrentContext();
-            CGContextSetFillColorWithColor(context, [[UIColor colorWithWhite:0 alpha:0.6] CGColor]);
+            CGContextSetFillColorWithColor(context, [[UIColor whiteColor] CGColor]);
             CGContextFillRect(context, rect);
             UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
             UIGraphicsEndImageContext();

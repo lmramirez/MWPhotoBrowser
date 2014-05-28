@@ -171,6 +171,7 @@
         [_toolbar setBackgroundImage:nil forToolbarPosition:UIToolbarPositionAny barMetrics:UIBarMetricsLandscapePhone];
     }
     _toolbar.barStyle = UIBarStyleBlackTranslucent;
+    _toolbar.translucent = NO;
     _toolbar.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
     
     // Toolbar Items
@@ -453,9 +454,16 @@
     }
     navBar.translucent = YES;
     navBar.barStyle = UIBarStyleBlackTranslucent;
+    CGRect rect = CGRectMake(0, 0, 1, 1);
+    UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0);
+    [[UIColor blackColor] setFill];
+    UIRectFill(rect);
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
     if ([[UINavigationBar class] respondsToSelector:@selector(appearance)]) {
-        [navBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
-        [navBar setBackgroundImage:nil forBarMetrics:UIBarMetricsLandscapePhone];
+        [navBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
+        [navBar setBackgroundImage:image forBarMetrics:UIBarMetricsLandscapePhone];
     }
 }
 
@@ -1076,7 +1084,7 @@
         if ([_delegate respondsToSelector:@selector(photoBrowser:titleForPhotoAtIndex:)]) {
             self.title = [_delegate photoBrowser:self titleForPhotoAtIndex:_currentPageIndex];
         } else {
-            self.title = [NSString stringWithFormat:@"%lu %@ %lu", (unsigned long)(_currentPageIndex+1), NSLocalizedString(@"of", @"Used in the context: 'Showing 1 of 3 items'"), (unsigned long)numberOfPhotos];
+            self.title = [NSString stringWithFormat:@"%lu %@ %lu", (unsigned long)(numberOfPhotos - _currentPageIndex), NSLocalizedString(@"of", @"Used in the context: 'Showing 1 of 3 items'"), (unsigned long)numberOfPhotos];
         }
 	} else {
 		self.title = nil;
